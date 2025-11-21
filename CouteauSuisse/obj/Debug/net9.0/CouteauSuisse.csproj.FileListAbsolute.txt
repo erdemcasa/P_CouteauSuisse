@@ -1,0 +1,14 @@
+E:\P_114_CouteauSuisse\CouteauSuisse\bin\Debug\net9.0\CouteauSuisse.exe
+E:\P_114_CouteauSuisse\CouteauSuisse\bin\Debug\net9.0\CouteauSuisse.deps.json
+E:\P_114_CouteauSuisse\CouteauSuisse\bin\Debug\net9.0\CouteauSuisse.runtimeconfig.json
+E:\P_114_CouteauSuisse\CouteauSuisse\bin\Debug\net9.0\CouteauSuisse.dll
+E:\P_114_CouteauSuisse\CouteauSuisse\bin\Debug\net9.0\CouteauSuisse.pdb
+E:\P_114_CouteauSuisse\CouteauSuisse\obj\Debug\net9.0\CouteauSuisse.GeneratedMSBuildEditorConfig.editorconfig
+E:\P_114_CouteauSuisse\CouteauSuisse\obj\Debug\net9.0\CouteauSuisse.AssemblyInfoInputs.cache
+E:\P_114_CouteauSuisse\CouteauSuisse\obj\Debug\net9.0\CouteauSuisse.AssemblyInfo.cs
+E:\P_114_CouteauSuisse\CouteauSuisse\obj\Debug\net9.0\CouteauSuisse.csproj.CoreCompileInputs.cache
+E:\P_114_CouteauSuisse\CouteauSuisse\obj\Debug\net9.0\CouteauSuisse.dll
+E:\P_114_CouteauSuisse\CouteauSuisse\obj\Debug\net9.0\refint\CouteauSuisse.dll
+E:\P_114_CouteauSuisse\CouteauSuisse\obj\Debug\net9.0\CouteauSuisse.pdb
+E:\P_114_CouteauSuisse\CouteauSuisse\obj\Debug\net9.0\CouteauSuisse.genruntimeconfig.cache
+E:\P_114_CouteauSuisse\CouteauSuisse\obj\Debug\net9.0\ref\CouteauSuisse.dll
