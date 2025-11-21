@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace CouteauSuisse
 {
@@ -26,7 +27,7 @@ namespace CouteauSuisse
                 }
 
                 Console.Write("\nVotre choix : ");
-                string choix = Console.ReadLine();
+                string choix = Console.ReadLine() ?? "";
 
                 switch (choix)
                 {
@@ -54,7 +55,7 @@ namespace CouteauSuisse
         static void ConvertisseurOptionMenu()
         {
 
-            string[] optionConvertisseurs = { "Décimal > Binaire", "Binaire > Décimal", "Binaire > octal", "Octal > Binaire" };
+            string[] optionConvertisseurs = { "Décimal => Binaire", "Binaire => Décimal",  "Octal => Binaire", "Binaire => Octal" };
             Console.Clear();
             
             Console.WriteLine("╭─────────────────────────────────────────────────────╮");
@@ -72,7 +73,7 @@ namespace CouteauSuisse
             }
 
             Console.Write("\nVotre choix : ");
-            string choix = Console.ReadLine();
+            string choix = Console.ReadLine() ?? "";
 
             switch (choix)
             {
@@ -103,8 +104,8 @@ namespace CouteauSuisse
 
         static void DecimalToBinaire()
         {
-            Console.Write("\n\nEntrez un nombre décimal : ");
-            string input = Console.ReadLine();
+            Console.Write("\nEntrez un nombre décimal : ");
+            string input = Console.ReadLine() ?? "";
             int number;
         
             if (!int.TryParse(input, out number))
@@ -139,12 +140,12 @@ namespace CouteauSuisse
 
         static void BinaireToDecimal()
         {
-            Console.Write("\n\nEntrez un nombre binaire : ");
-            string input = Console.ReadLine();
+            Console.Write("\nEntrez un nombre binaire : ");
+            string input = Console.ReadLine() ?? "";
         
             if (string.IsNullOrWhiteSpace(input) || !input.All(c => c == '0' || c == '1'))
             {
-                Console.WriteLine("\nVeuillez entrer un nombre binaire valide (uniquement 0 et 1) !");
+                Console.WriteLine("\nVeuillez entrer un nombre binaire valides (uniquement 0 et 1) !");
             }
             else
             {
@@ -166,7 +167,7 @@ namespace CouteauSuisse
         {
             string userInput;
             int userInputToInt;
-            Console.WriteLine("\n\nEntrez un nombre décimal : ");
+            Console.WriteLine("\nEntrez un nombre décimal : ");
             
             userInput = Console.ReadLine();
 
@@ -179,18 +180,39 @@ namespace CouteauSuisse
         }
         static void BinaireToOctal()
         {
-            string userInput;
-            int userInputToInt;
-            Console.WriteLine("\n\nEntrez un nombre décimal : ");
-            
-            userInput = Console.ReadLine();
+            Console.Write("\nEntrez un nombre binaire : ");
+            string? input = Console.ReadLine();
 
-            if (Int32.TryParse(userInput, out userInputToInt))
+            if (string.IsNullOrWhiteSpace(input) || !input.All(c => c == '0' || c == '1'))
             {
-                Console.WriteLine(userInputToInt.GetType());
+                Console.WriteLine("\nVeuillez entrer un nombre binaire valide (uniquement 0 et 1) !");
+            }
+            else
+            {
+                int decimalValue = 0;
+                for (int i = 0; i < input.Length; i++)
+                {
+                    int bit = input[input.Length - 1 - i] - '0';
+                    decimalValue += bit << i; 
+                }
+
+                string octal = "";
+                
+                if (decimalValue == 0) octal = "0";
+                else
+                {
+                    while (decimalValue > 0)
+                    {
+                        octal = (decimalValue % 8) + octal;
+                        decimalValue /= 8;
+                    }
+                }
+
+                Console.WriteLine($"\nRésultat de {input} en octale : {octal}");
             }
 
-        
+            Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
+            Console.ReadKey();
         }
 
         static void MorseTool()
@@ -203,7 +225,8 @@ namespace CouteauSuisse
             Console.WriteLine("╰─────────────────────────────────────────────────────╯");
 
             Console.Write("\nEntrez un mot ou une phrase (sans accents, lettres A-Z) : ");
-            string resultat = ConvertToMorse(Console.ReadLine());
+            string userText = Console.ReadLine() ?? "";
+            string resultat = ConvertToMorse(userText);
             
             Console.WriteLine("\nRésultat en Morse :");
             Console.ForegroundColor = ConsoleColor.Cyan;
