@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pl23ksc\\Documents\\P_114\\CouteauSuisse\\CouteauSuisse.csproj": {}
+    "C:\\Users\\pl23ksc\\Documents\\P_CouteauSuisse\\CouteauSuisse\\CouteauSuisse.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pl23ksc\\Documents\\P_114\\CouteauSuisse\\CouteauSuisse.csproj": {
+    "C:\\Users\\pl23ksc\\Documents\\P_CouteauSuisse\\CouteauSuisse\\CouteauSuisse.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pl23ksc\\Documents\\P_114\\CouteauSuisse\\CouteauSuisse.csproj",
+        "projectUniqueName": "C:\\Users\\pl23ksc\\Documents\\P_CouteauSuisse\\CouteauSuisse\\CouteauSuisse.csproj",
         "projectName": "CouteauSuisse",
-        "projectPath": "C:\\Users\\pl23ksc\\Documents\\P_114\\CouteauSuisse\\CouteauSuisse.csproj",
+        "projectPath": "C:\\Users\\pl23ksc\\Documents\\P_CouteauSuisse\\CouteauSuisse\\CouteauSuisse.csproj",
         "packagesPath": "C:\\Users\\pl23ksc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pl23ksc\\Documents\\P_114\\CouteauSuisse\\obj\\",
+        "outputPath": "C:\\Users\\pl23ksc\\Documents\\P_CouteauSuisse\\CouteauSuisse\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

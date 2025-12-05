@@ -27,7 +27,7 @@ namespace CouteauSuisse
                 }
 
                 Console.Write("\nVotre choix : ");
-                string choix = Console.ReadLine() ?? "";
+                string choix = Console.ReadLine();
 
                 switch (choix)
                 {
@@ -73,7 +73,7 @@ namespace CouteauSuisse
             }
 
             Console.Write("\nVotre choix : ");
-            string choix = Console.ReadLine() ?? "";
+            string choix = Console.ReadLine();
 
             switch (choix)
             {
@@ -105,7 +105,7 @@ namespace CouteauSuisse
         static void DecimalToBinaire()
         {
             Console.Write("\nEntrez un nombre décimal : ");
-            string input = Console.ReadLine() ?? "";
+            string input = Console.ReadLine();
             int number;
         
             if (!int.TryParse(input, out number))
@@ -141,7 +141,7 @@ namespace CouteauSuisse
         static void BinaireToDecimal()
         {
             Console.Write("\nEntrez un nombre binaire : ");
-            string input = Console.ReadLine() ?? "";
+            string input = Console.ReadLine();
         
             if (string.IsNullOrWhiteSpace(input) || !input.All(c => c == '0' || c == '1'))
             {
@@ -165,23 +165,46 @@ namespace CouteauSuisse
         }
         static void OctalToBinaire()
         {
-            string userInput;
-            int userInputToInt;
-            Console.WriteLine("\nEntrez un nombre décimal : ");
-            
-            userInput = Console.ReadLine();
+            Console.Write("\nEntrez un nombre octal : ");
+            string input = Console.ReadLine();
 
-            if (Int32.TryParse(userInput, out userInputToInt))
+            if (string.IsNullOrWhiteSpace(input) || !input.All(c => c >= '0' && c <= '7'))
             {
-                Console.WriteLine(userInputToInt.GetType());
+                Console.WriteLine("\nVeuillez entrer un nombre octal valide (chiffres 0-7) !");
+            }
+            else
+            {
+                int decimalValue = 0;
+                for (int i = 0; i < input.Length; i++)
+                {
+                    int digit = input[input.Length - 1 - i] - '0';
+                    decimalValue += digit * (int)Math.Pow(8, i);
+                }
+
+                string binary = "";
+                
+                if (decimalValue == 0) binary = "0";
+                else
+                {
+                    while (decimalValue > 0)
+                    {
+                        binary = (decimalValue % 2) + binary;
+                        decimalValue /= 2;
+                    }
+                }
+
+                Console.WriteLine($"\nRésultat de {input} en binaire : {binary}");
             }
 
-        
+            Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
+            Console.ReadKey();
+            
+
         }
         static void BinaireToOctal()
         {
             Console.Write("\nEntrez un nombre binaire : ");
-            string? input = Console.ReadLine();
+            string input = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(input) || !input.All(c => c == '0' || c == '1'))
             {
@@ -193,7 +216,7 @@ namespace CouteauSuisse
                 for (int i = 0; i < input.Length; i++)
                 {
                     int bit = input[input.Length - 1 - i] - '0';
-                    decimalValue += bit << i; 
+                    decimalValue += bit * (int)Math.Pow(2, i);
                 }
 
                 string octal = "";
@@ -208,7 +231,7 @@ namespace CouteauSuisse
                     }
                 }
 
-                Console.WriteLine($"\nRésultat de {input} en octale : {octal}");
+                Console.WriteLine($"\nRésultat de {input} en octal : {octal}");
             }
 
             Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
@@ -225,7 +248,7 @@ namespace CouteauSuisse
             Console.WriteLine("╰─────────────────────────────────────────────────────╯");
 
             Console.Write("\nEntrez un mot ou une phrase (sans accents, lettres A-Z) : ");
-            string userText = Console.ReadLine() ?? "";
+            string userText = Console.ReadLine();
             string resultat = ConvertToMorse(userText);
             
             Console.WriteLine("\nRésultat en Morse :");
