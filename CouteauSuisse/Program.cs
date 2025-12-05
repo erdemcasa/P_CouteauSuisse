@@ -7,7 +7,7 @@ namespace CouteauSuisse
     {
         static void Main(string[] args)
         {
-            string[] optionOutils = { "Morse", "Convertisseur bases (Binaire <> Octal)", "Test2", "Quitter" };
+            string[] optionOutils = { "Morse", "Convertisseur bases (Binaire <> Octal)", "Code césar", "Quitter" };
             bool continuer = true;
 
             while (continuer)
@@ -38,7 +38,7 @@ namespace CouteauSuisse
                         ConvertisseurOptionMenu();
                         break;
                     case "3":
-                        Test2Tool();
+                        CodeCesar();
                         break;
                     case "4":
                         continuer = false;
@@ -110,7 +110,7 @@ namespace CouteauSuisse
         
             if (!int.TryParse(input, out number))
             {
-                Console.WriteLine("\nVeuilez entrer un entier !");
+                Console.WriteLine("\nVeuilez entrez un entier !");
             }
             else
             {
@@ -145,7 +145,7 @@ namespace CouteauSuisse
         
             if (string.IsNullOrWhiteSpace(input) || !input.All(c => c == '0' || c == '1'))
             {
-                Console.WriteLine("\nVeuillez entrer un nombre binaire valides (uniquement 0 et 1) !");
+                Console.WriteLine("\nVeuillez entrez un nombre binaire valides (uniquement 0 et 1) !");
             }
             else
             {
@@ -157,7 +157,7 @@ namespace CouteauSuisse
                     decimalValue += bit * (int)Math.Pow(2, i);
                 }
         
-                Console.WriteLine($"\nRésultat de {input} en décimal : {decimalValue}");
+                Console.WriteLine($"\nRésultats de {input} en décimal : {decimalValue}");
             }
         
             Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
@@ -170,7 +170,7 @@ namespace CouteauSuisse
 
             if (string.IsNullOrWhiteSpace(input) || !input.All(c => c >= '0' && c <= '7'))
             {
-                Console.WriteLine("\nVeuillez entrer un nombre octal valide (chiffres 0-7) !");
+                Console.WriteLine("\nVeuillez entrez un nombre octal valides (chiffres 0-7) !");
             }
             else
             {
@@ -260,15 +260,117 @@ namespace CouteauSuisse
         }
 
 
-        static void Test2Tool()
+        static void CodeCesar()
         {
+
+            string[] optionsCesar = { "Normal => César", "César => Normal"};
             Console.Clear();
-            Console.WriteLine("Vous avez choisi l'outil Test2 !");
-            Console.WriteLine("Appuyez sur une touche pour revenir au menu...");
+            
+            Console.WriteLine("╭─────────────────────────────────────────────────────╮");
+            Console.WriteLine("│                                                     │");
+            Console.WriteLine("│               Convertisseur code césar              │");
+            Console.WriteLine("│                                                     │");
+            Console.WriteLine("╰─────────────────────────────────────────────────────╯");
+        
+        
+            Console.WriteLine("\nChoisissez une option :\n");
+
+            for (int i = 0; i < optionsCesar.Length ; i++)
+            {
+                Console.WriteLine($"    {i + 1}. {optionsCesar[i]}");
+            }
+
+            Console.Write("\nVotre choix : ");
+            string choix = Console.ReadLine();
+
+            switch (choix)
+            {
+                case "1":
+                    NormalToCesar();
+                    break;
+
+                case "2":
+                    CesarToNormal();
+                    break;
+
+                
+                default:
+                    Console.WriteLine("Votre choix est invalide. Appuyer sur une touche pour réésssayer ...");
+                    Console.ReadKey();
+                    break;
+
+            }
+        }
+
+        static void NormalToCesar()
+        {
+            Console.Write("\nEntrez un texte à convertir en code césar : ");
+            string input = Console.ReadLine();
+
+            Console.Write("\nEntrer la clé de décalage (nombre entier) : ");
+            int decalage = int.Parse(Console.ReadLine());
+            decalage = (decalage % 26 + 26) % 26;
+
+            string resultat = "";
+
+            foreach (char c in input)
+            {
+                if (char.IsLetter(c))
+                {
+                    bool maj = char.IsUpper(c);
+                    char debut = maj ? 'A' : 'a';
+
+                    char nouveau = (char)(debut + (c - debut + decalage) % 26);
+                    resultat += nouveau;
+                }
+                else
+                {
+                    resultat += c;
+                }
+            }
+
+            Console.WriteLine($"\nTexte converti en code César : {resultat}");
+
+            Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
             Console.ReadKey();
         }
 
-        public static string ConvertToMorse(string input)
+
+        static void CesarToNormal()
+        {
+            Console.Write("\nEntrez un texte en code césar à décoder : ");
+            string input = Console.ReadLine();
+
+            Console.Write("\nEntrer la clé de décalage (nombre entier) : ");
+            int decalage = int.Parse(Console.ReadLine());
+            decalage = (decalage % 26 + 26) % 26;
+
+            string resultat = "";
+
+            foreach (char c in input)
+            {
+                if (char.IsLetter(c))
+                {
+                    bool maj = char.IsUpper(c);
+                    char debut = maj ? 'A' : 'a';
+
+                    char nouveau = (char)(debut + (c - debut - decalage + 26) % 26);
+                    resultat += nouveau;
+                }
+                else
+                {
+                    resultat += c;
+                }
+            }
+
+            Console.WriteLine($"\nTexte décodé du code César : {resultat}");
+
+            Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
+            Console.ReadKey();
+        }
+        
+
+        static string ConvertToMorse(string input)
         {
             string[,] morse =
             {
