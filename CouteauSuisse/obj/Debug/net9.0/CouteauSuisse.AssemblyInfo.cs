@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CouteauSuisse")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+364a74ec9927b003bb41f8a0810b77458f2f4788")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+89ecd9bec754ff60c2a3f41185ca839de06c9611")]
 [assembly: System.Reflection.AssemblyProductAttribute("CouteauSuisse")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CouteauSuisse")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

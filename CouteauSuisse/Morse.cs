@@ -43,7 +43,7 @@ namespace CouteauSuisse
                     break;
 
                 case "2":
-                    MorseToText();
+                    //MorseToText();
                     break;
 
                 default:
@@ -59,7 +59,7 @@ namespace CouteauSuisse
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static string TextToMorse()
+        public static void TextToMorse()
         {
             string[,] morse =
             {
@@ -70,64 +70,96 @@ namespace CouteauSuisse
                 {"U", "..-"}, {"V", "...-"}, {"W", ".--"}, {"X", "-..-"}, {"Y", "-.--"},
                 {"Z", "--.."}, {"0", "-----"}, {"1", ".----"}, {"2", "..---"}, {"3", "...--"},
                 {"4", "....-"}, {"5", "....."}, {"6", "-...."}, {"7", "--..."}, {"8", "---.."},
-                {"9", "----."}/*, {".", ".-.-.-"}, {",", "--..--"}, {"?", "..--.."}, {"'", ".----."},
+                {"9", "----."}, {".", ".-.-.-"}, {",", "--..--"}, {"?", "..--.."}, {"'", ".----."},
                 {"!", "-.-.--"}, {"/", "-..-."}, {"(", "-.--."}, {")", "-.--.-"}, {"&", ".-..."},
                 {":", "---..."}, {";", "-.-.-."}, {"=", "-...-"}, {"+", ".-.-."}, {"-", "-....-"},
-                {"_", "..--.-"}, {"'", ".-..-."}, {"$", "...-..-"}, {"@", ".--.-."}, {" ", "/"}*/
+                {"_", "..--.-"}, {"'", ".-..-."}, {"$", "...-..-"}, {"@", ".--.-."}, {" ", "/"}
             };
 
-            // Demande du texte a convertirs
             Console.Write("\nEntrez un texte à convertir en morse : ");
             string input = Console.ReadLine();
 
+            // Verification si le imput du l'utilitaeur est vide
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                Console.WriteLine("Veuillez saisir qeulque chose");
+                return;
+            }
+
             string finalText = "";
             string userInput = input.ToUpper();
+            bool hasError = false;
+            string invalidChars = "";
 
-            // Pour chaque caractères de l'entree utilisateurs, on cherche sa correspondance en Morse
+            // Parcours de chaque caractère de l'utilisateur
             for (int i = 0; i < userInput.Length; i++)
             {
-                // Recherche dans le tableau Morse
+                // mEttre / si il y'a un espace
+                if (userInput[i] == ' ')
+                {
+                    finalText += "/ ";
+                    continue;
+                }
+
                 bool found = false;
                 for (int j = 0; j < morse.GetLength(0); j++)
                 {
-                    // Si on trouve une correspondance, on ajoute le code Morse au resultat
                     if (userInput[i].ToString() == morse[j, 0])
                     {
-
                         finalText += morse[j, 1] + " ";
                         found = true;
                         break;
                     }
                 }
-                // Si aucun correspondance n'est trouvee, on ajoute un "?" au resultat
-                if (!found) finalText += "? ";
+
+                // Si le caractère n'est pas dans le tableau ca met [?]
+                if (!found)
+                {
+                    hasError = true;
+                    invalidChars += userInput[i] + " ";
+                    finalText += "[?] "; 
+                }
             }
 
-            return finalText;
-        }
+            // Affihce les caracteres si 
+            if (hasError)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"\nCes caractere la ne sont pas reconnus : {invalidChars}");
+                Console.ResetColor();
+            }
 
-        /// <summary>
-        /// Outil de conversion en Morses
-        /// </summary>
-        public static void Tool()
-        {
-            Console.Clear();
-            Console.WriteLine("╭─────────────────────────────────────────────────────╮");
-            Console.WriteLine("│                                                     │");
-            Console.WriteLine("│        Convertisseur de texte en code Morse         │");
-            Console.WriteLine("│                                                     │");
-            Console.WriteLine("╰─────────────────────────────────────────────────────╯");
-
-            Console.Write("\nEntrez un mot ou une phrase (sans accents, lettres A-Z) : ");
-            string userText = Console.ReadLine();
-            string resultat = Morse.Convert(userText);
-
-            Console.WriteLine("\nRésultat en Morse :");
+            Console.WriteLine("\nRésultats en Morse :");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"{resultat}");
+            Console.WriteLine(finalText);
             Console.ResetColor();
+
             Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
             Console.ReadKey();
         }
+
+        // /// <summary>
+        // /// Outil de conversion en Morses
+        // /// </summary>
+        // public static void Tool()
+        // {
+        //     Console.Clear();
+        //     Console.WriteLine("╭─────────────────────────────────────────────────────╮");
+        //     Console.WriteLine("│                                                     │");
+        //     Console.WriteLine("│        Convertisseur de texte en code Morse         │");
+        //     Console.WriteLine("│                                                     │");
+        //     Console.WriteLine("╰─────────────────────────────────────────────────────╯");
+        // 
+        //     Console.Write("\nEntrez un mot ou une phrase (sans accents, lettres A-Z) : ");
+        //     string userText = Console.ReadLine();
+        //     string resultat = Morse.Convert(userText);
+        // 
+        //     Console.WriteLine("\nRésultat en Morse :");
+        //     Console.ForegroundColor = ConsoleColor.Cyan;
+        //     Console.WriteLine($"{resultat}");
+        //     Console.ResetColor();
+        //     Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
+        //     Console.ReadKey();
+        // }
     }
 }
