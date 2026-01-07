@@ -43,7 +43,7 @@ namespace CouteauSuisse
                     break;
 
                 case "2":
-                    //MorseToText();
+                    MorseToText();
                     break;
 
                 default:
@@ -57,8 +57,6 @@ namespace CouteauSuisse
         /// <summary>
         /// Convertit un texte en code Morse
         /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
         public static void TextToMorse()
         {
             string[,] morse =
@@ -79,7 +77,6 @@ namespace CouteauSuisse
             Console.Write("\nEntrez un texte à convertir en morse : ");
             string input = Console.ReadLine();
 
-            // Verification si le imput du l'utilitaeur est vide
             if (string.IsNullOrWhiteSpace(input))
             {
                 Console.WriteLine("Veuillez saisir qeulque chose");
@@ -130,6 +127,82 @@ namespace CouteauSuisse
             }
 
             Console.WriteLine("\nRésultats en Morse :");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(finalText);
+            Console.ResetColor();
+
+            Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
+            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Convertit du morse en texte
+        /// </summary>
+        public static void MorseToText()
+        {
+            string[,] morse =
+            {
+                {"A", ".-"}, {"B", "-..."}, {"C", "-.-."}, {"D", "-.."}, {"E", "."},
+                {"F", "..-."}, {"G", "--."}, {"H", "...."}, {"I", ".."}, {"J", ".---"},
+                {"K", "-.-"}, {"L", ".-.."}, {"M", "--"}, {"N", "-."}, {"O", "---"},
+                {"P", ".--."}, {"Q", "--.-"}, {"R", ".-."}, {"S", "..."}, {"T", "-"},
+                {"U", "..-"}, {"V", "...-"}, {"W", ".--"}, {"X", "-..-"}, {"Y", "-.--"},
+                {"Z", "--.."}, {"0", "-----"}, {"1", ".----"}, {"2", "..---"}, {"3", "...--"},
+                {"4", "....-"}, {"5", "....."}, {"6", "-...."}, {"7", "--..."}, {"8", "---.."},
+                {"9", "----."}, {".", ".-.-.-"}, {",", "--..--"}, {"?", "..--.."}, {"'", ".----."},
+                {"!", "-.-.--"}, {"/", "-..-."}, {"(", "-.--."}, {")", "-.--.-"}, {"&", ".-..."},
+                {":", "---..."}, {";", "-.-.-."}, {"=", "-...-"}, {"+", ".-.-."}, {"-", "-....-"},
+                {"_", "..--.-"}, {"\"", ".-..-."}, {"$", "...-..-"}, {"@", ".--.-."}, {" ", "/"}
+            };
+
+            Console.Write("\nEntrer le code morse a convertir : ");
+            string input = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                Console.WriteLine("Veuillez saisir quelques chose");
+                return;
+            }
+
+            // On separe la chaine par les espaces pour obtenir chaque symbole Morse
+            string[] words = input.Split(' ');
+            string finalText = "";
+            bool hasError = false;
+            string invalidCodes = "";
+
+            foreach (string symbol in words)
+            {
+                // Ignore les doubles espaces
+                if (string.IsNullOrEmpty(symbol)) continue; 
+
+                bool found = false;
+
+                for (int j = 0; j < morse.GetLength(0); j++)
+                {
+                    if (symbol == morse[j, 1])
+                    {
+                        finalText += morse[j, 0];
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    hasError = true;
+                    invalidCodes += symbol + " ";
+                    finalText += "[?]";
+                }
+            }
+
+            if (hasError)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"\nCodes mrses non reconnu : {invalidCodes}");
+                Console.ResetColor();
+            }
+
+            Console.WriteLine("\nResultat en texte :");
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(finalText);
             Console.ResetColor();
